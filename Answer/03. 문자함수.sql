@@ -34,6 +34,9 @@ create table emp_sql
 insert into emp_sql
 values('개발자', 21, '90/07/15', 'gaebal@gmail.com', '경기도 일산서구');
 
+insert into emp_sql
+values('이윤정', 21, to_date('1998/08/19', 'RRRR/MM/DD'), 'lee_819@naver.com', '경기도 고양시 덕양구');
+
 -- 문제42.
 select ename, age
 from emp_sql
