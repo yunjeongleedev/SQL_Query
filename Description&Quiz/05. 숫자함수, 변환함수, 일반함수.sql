@@ -31,10 +31,10 @@
         년도 : RRRR, RR, YYYY, YY
         달   : MM(숫자), MON(영어)
         일   : DD
-        시간 : HH, HH24
+        시간 : HH(오후 1시=01), HH24(오후 1시=13)
         분   : MI
         초   : SS
-        요일 : DAY, DY, D
+        요일 : DAY(금요일), DY(금), D(6)
 
         예) select birth, to_char(birth, 'day'), to_char(birth, 'd')
             from emp_sql

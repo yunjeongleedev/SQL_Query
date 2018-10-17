@@ -107,6 +107,11 @@ select ename, job, to_char(decode(job, 'ANALYST', sal*0.5, 'SALESMAN', sal*0.8, 
                             , '999,999') 보너스
 from emp;
 
+select ename, job, to_char(case job when 'ANALYST' then 0.5*sal
+                                    when 'SALESMAN' then 0.8*sal
+                                    else 0 end, '999,999') as bonus
+from emp;
+
 -- 문제76.
 select ename, to_char(hiredate, 'RRRR'),
        decode(to_char(hiredate, 'RRRR'), '1981', 3000, '1982', 2000, 0) as 보너스
@@ -118,4 +123,9 @@ select ename, to_char(birth, 'day'), address,
     when to_char(birth, 'd') in (5, 6, 7) and address like '%서울%' then 5000
     when to_char(birth, 'd')=1 and address like '%서울%' then 7000
     else 0 end as 보너스
+from emp_sql;
+
+select ename, to_char(birth, 'day'), address,
+decode(substr(address, 1, 2), '서울', decode(to_char(birth, 'd'),
+ 1, 7000, 2, 9000, 3, 9000, 4, 9000, 5, 5000, 6, 5000, 7, 5000), 0) as bonus
 from emp_sql;
