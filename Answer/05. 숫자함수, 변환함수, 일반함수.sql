@@ -119,13 +119,37 @@ from emp;
 
 -- 문제77.
 select ename, to_char(birth, 'day'), address,
-    case when to_char(birth, 'd') in (2, 3, 4) and address like '%서울%' then 9000
-    when to_char(birth, 'd') in (5, 6, 7) and address like '%서울%' then 5000
-    when to_char(birth, 'd')=1 and address like '%서울%' then 7000
+    case when to_char(birth, 'd') in ('2', '3', '4') and address like '%서울%' then 9000
+    when to_char(birth, 'd') in ('5', '6', '7') and address like '%서울%' then 5000
+    when to_char(birth, 'd')='1' and address like '%서울%' then 7000
     else 0 end as 보너스
 from emp_sql;
 
 select ename, to_char(birth, 'day'), address,
 decode(substr(address, 1, 2), '서울', decode(to_char(birth, 'd'),
- 1, 7000, 2, 9000, 3, 9000, 4, 9000, 5, 5000, 6, 5000, 7, 5000), 0) as bonus
+ '1', 7000, '2', 9000, '3', 9000, '4', 9000, '5', 5000, '6', 5000, '7', 5000), 0) as bonus
 from emp_sql;
+
+■ to_char에서 세미콜론을 반드시 사용해야 하는 이유
+    set autot on 을 사용하여 sql문 처리과정을 확인
+
+→ 세미콜론을 사용한 경우
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   1 - filter(TO_CHAR(INTERNAL_FUNCTION("BIRTH"),'d')='1' OR
+              TO_CHAR(INTERNAL_FUNCTION("BIRTH"),'d')='2' OR
+              TO_CHAR(INTERNAL_FUNCTION("BIRTH"),'d')='3')
+
+to_char 함수가 형변환 없이 실행됨
+
+→ 세미콜론을 사용하지 않은 경우
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   1 - filter(TO_NUMBER(TO_CHAR(INTERNAL_FUNCTION("BIRTH"),'d'))=1 OR
+              TO_NUMBER(TO_CHAR(INTERNAL_FUNCTION("BIRTH"),'d'))=2 OR
+              TO_NUMBER(TO_CHAR(INTERNAL_FUNCTION("BIRTH"),'d'))=3)
+
+to_char 함수를 to_number 함수로 감싸 숫자로 형변환
+데이터셋이 큰 경우 sql문을 처리하는 시간이 더 오래 걸림
