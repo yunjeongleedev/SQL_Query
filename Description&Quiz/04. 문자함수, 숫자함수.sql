@@ -74,7 +74,7 @@
 	예: select ename, sal, round(sal) bonus
 		from emp;
 
-■ trunk
+■ trunc
 
 	"반올림이 아니라 버리는 함수"
 
@@ -110,7 +110,7 @@
 
 문제53. 이름, 입사한 날짜부터 오늘까지 총 몇 년 근무했는지 출력하시오.
 
-■ add_month 함수
+■ add_months 함수
 
 	"날짜에서 개월 수를 더한 날짜를 출력하는 함수"
 
