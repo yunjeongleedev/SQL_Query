@@ -150,3 +150,17 @@ select emp.ename, dept.loc, emp.sal, emp.deptno
 from emp, dept
 where emp.deptno=dept.deptno --> 조인을 하기 위한 연결고리 조건
 and dept.loc='DALLAS';       --> 검색조건
+
+-- 4번째 과제
+
+SQL 문장을 복사 붙여넣기하면 'SP2-0734' 에러가 발생합니다.
+에러를 해결하기 위해 'set sqlblanklines on'을 추가했습니다.
+더불어, 가독성을 높이기 위해 컬럼 길이를 조절했습니다. 감사합니다 :)
+
+set sqlblanklines on 
+col "이메일 도메인" for a15
+col 이름 for a60
+select substr(email, instr(email, '@')+1, instr(email, '.')-instr(email,'@')-1) "이메일 도메인",
+listagg(ename||'('||age||')',',') within group (order by age desc) 이름
+from emp_sql
+group by substr(email, instr(email, '@')+1, instr(email, '.')-instr(email, '@')-1);
