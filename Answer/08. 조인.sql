@@ -149,3 +149,15 @@ select e.ename, e.sal, d.loc, s.grade
 from emp e, dept d, salgrade s
 where e.deptno = d.deptno
 and e.sal between s.losal and s.hisal;
+
+-- 5번째 과제
+SQL 문장을 복사 붙여넣기하면 'SP2-0734' 에러가 발생합니다.
+에러를 해결하기 위해 'set sqlblanklines on'을 추가했습니다.
+감사합니다 :)
+
+set sqlblanklines on
+select e.ename, e.sal, d.loc, s.grade
+from emp e join dept d
+on (e.deptno = d.deptno)
+join salgrade s
+on (e.sal between s.losal and s.hisal);
