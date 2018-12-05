@@ -217,3 +217,12 @@ max(sal) over() 최대월급,
 min(sal) over() 최소월급,
 sum(sal) over() 토탈월급
 from emp;
+
+-- 6번 째 과제
+select empno, ename, sal,
+(select avg(sal)
+from emp)
+from emp
+where sal>
+(select avg(sal)
+from emp);
