@@ -123,3 +123,15 @@ group by deptno;
 -- 문제239.
 alter table dept 
 add sumsal number(10);
+
+-- 문제240.
+merge into dept d
+using (select deptno, sum(sal) sumsal
+from emp
+group by deptno) e
+on (e.deptno = d.deptno)
+when matched then
+update set d.sumsal = e.sumsal;
+
+select deptno, sumsal
+from dept;
