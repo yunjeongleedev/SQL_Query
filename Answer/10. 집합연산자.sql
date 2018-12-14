@@ -172,6 +172,14 @@ from emp
 order by deptno asc nulls first;
 
 -- 문제195.
+select nvl(job, '전체토탈'), 토탈월급
+from (select job, sum(sal) 토탈월급
+from emp
+group by job
+union all
+select null as job, sum(sal) 토탈월급
+from emp
+order by job asc nulls first);
 
 -- 문제196.
 select to_char(deptno) as deptno, sum(sal)
